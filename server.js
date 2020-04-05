@@ -28,24 +28,40 @@ function Location(city, geoData) {
 }
 
 //____________________
+
+
+
+
 app.get('/weather', (request, response) => {
   try {
-    const weatherData = require('./data/darksky.json');
-    const city = request.query.city;
-    const locationData = new Location(city, geoData);
-    response.status(200).json(locationData);
+    
+    const weatherDateData = require('./data/darksky.json');
+    let DateWeatherArr=[];
+    // const city$ = request.query.city;
+    for(let i=0;i<weatherDateData.data.length;i++){
+      // const dateAndWeatherObj$$ = new weather(city$,weatherDateData);
+      let dateAndWeatherObj$$ = new weather(weatherDateData,i);
+      DateWeatherArr.push(dateAndWeatherObj$$);
+  }
+  response.send(DateWeatherArr);
   } catch (error) {
     errorHandler(error, request, response);
   }
 });
 
 
-function weather(city, geoData) {
-  this.search_query = city;
-  this.formatted_query = geoData[0].display_name;
-  this.latitude = geoData[0].lat;
-  this.longitude = geoData[0].lon;
-}
+// function weather(city$,fileDarkSky) {
+  
+  function weather(fileDarkSky,indexx) {
+    // this.search_query = city$;
+    this.time = fileDarkSky.data[indexx].valid_date;
+    this.forecast = fileDarkSky.data[indexx].weather.description;
+    weather.all.push(this);
+  
+  }
+  weather.all=[];
+
+
 
 
 
