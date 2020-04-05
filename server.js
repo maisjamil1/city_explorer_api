@@ -74,15 +74,8 @@ app.get('/weather', (request, response) => {
 app.use('*', notFoundHandler);
 
 function notFoundHandler(request, response) {
-  response.status(404).send('NOT FOUND!!');
-}
-function errorHandler(error, request, response) {
-  response.status(500).send(error);
+  response.status(500).send('Sorry, something went wrong');
 }
 
-
-
-
-
-app.listen(PORT, () => console.log(`server is  running on ${PORT}`));
+app.listen(PORT);
 
