@@ -54,7 +54,7 @@ app.get('/weather', (request, response) => {
   
   function weather(fileDarkSky,indexx) {
     // this.search_query = city$;
-    this.time = fileDarkSky.data[indexx].valid_date;
+    this.time =new Date(fileDarkSky.data[indexx].valid_date).toDateString();
     // this.time = new Date(fileDarkSky.data[indexx].valid_date);
     this.forecast = fileDarkSky.data[indexx].weather.description;
     weather.all.push(this);
